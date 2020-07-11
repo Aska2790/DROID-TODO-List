@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/sign_in_dest">
+
+    <fragment
+        android:id="@+id/sign_in_dest"
+        android:name="com.aska.development.todolist.ui.auth.signin.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/sign_up_action"
+            app:destination="@id/sign_up_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/sign_up_dest"
+        android:name="com.aska.development.todolist.ui.auth.signup.SignUpFragment"
+        android:label="SignUpFragment" />
+</navigation>

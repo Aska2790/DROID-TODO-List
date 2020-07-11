@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_nav_graph"
+    app:startDestination="@id/profile_dest">
+
+    <fragment
+        android:id="@+id/task_list_dest"
+        android:name="com.aska.development.todolist.ui.main.tasks.list.TaskListFragment"
+        android:label="fr_task_list"
+        tools:layout="@layout/fr_task_list" >
+        <action
+            android:id="@+id/task_view_action"
+            app:destination="@id/task_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/task_dest"
+        android:name="com.aska.development.todolist.ui.main.tasks.view.TaskViewFragment"
+        android:label="fr_task"
+        tools:layout="@layout/fr_task" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_dest"
+        android:name="com.aska.development.todolist.ui.main.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>

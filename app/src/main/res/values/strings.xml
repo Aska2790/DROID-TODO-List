@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">TODOList</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Main-->
+    <string name="main_first_back_click_message">Для выхода нажмите еще раз</string>
+
+    <!--    Auth-->
+    <string name="sign_up_dest_title">Создание профиля</string>
+    <string name="auth_email_hint">Электронный адрес</string>
+    <string name="auth_first_name_hint">Имя</string>
+    <string name="auth_second_name_hint">Фамилия</string>
+    <string name="auth_password_hint">Пароль</string>
+    <string name="auth_control_password_hint">Повторный ввод пароля</string>
+    <string name="auth_sign_in">Войти</string>
+    <string name="auth_sign_up">Создать профиль</string>
+    <string name="action_sign_in_short">Войти</string>
+
+    <!--    Profile-->
+    <string name="profile_dest_title">Профиль</string>
+    <string name="logout_dest_title">Выйти</string>
+
+
+    <!--    Task-->
+    <string name="task_list_dest_title">Задачи</string>
+    <string name="task_dest_title">Задача</string>
+    <string name="profile_sign_out_btn_label">Выход</string>
+</resources>

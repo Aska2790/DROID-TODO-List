@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="SignUpViewBinding">
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.aska.development.todolist.ui.auth.signup.SignUpViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="72dp"
+            android:paddingRight="72dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp">
+
+
+            <TextView
+                android:id="@+id/auth_error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="@{viewmodel.errorMessage == null ? View.INVISIBLE: View.VISIBLE}"
+                android:layout_marginTop="24dp"
+                android:text="@{viewmodel.errorMessage}"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_below="@id/auth_error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/auth_first_name"
+                    android:hint="@string/auth_first_name_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewmodel.firstName}" />
+
+                <EditText
+                    android:id="@+id/auth_second_name"
+                    android:hint="@string/auth_second_name_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewmodel.secondName}" />
+
+                <EditText
+                    android:id="@+id/auth_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/auth_email_hint"
+                    android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewmodel.email}" />
+
+
+                <EditText
+                    android:id="@+id/auth_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/auth_password_hint"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewmodel.password}" />
+
+                <EditText
+                    android:id="@+id/auth_control_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/auth_control_password_hint"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewmodel.controlPassword}" />
+
+                <Button
+                    android:id="@+id/sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="64dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginRight="64dp"
+                    android:enabled="@{viewmodel.paramValid}"
+                    android:onClick="@{()->viewmodel.signUp()}"
+                    android:text="@string/auth_sign_up"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="64dp"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

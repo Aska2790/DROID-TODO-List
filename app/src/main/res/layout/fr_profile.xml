@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="ProfileViewBinding">
+        <variable
+            name="viewmodel"
+            type="com.aska.development.todolist.ui.main.profile.ProfileViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:onClick="@{()->viewmodel.signOut()}"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:id="@+id/btn_sign_out"
+            android:text="@string/profile_sign_out_btn_label"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</layout>
