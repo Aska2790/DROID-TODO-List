@@ -66,7 +66,7 @@ public class TaskViewFragment extends DaggerFragment {
                 mSupportActionBar.show();
             }
 
-            mSupportActionBar.setTitle(R.string.task_dest_title);
+            mSupportActionBar.setTitle(R.string.task_view_dest_title);
             mSupportActionBar.setHomeButtonEnabled(true);      // Disable the button
             mSupportActionBar.setDisplayHomeAsUpEnabled(true); // Remove the left caret
             mSupportActionBar.setDisplayShowHomeEnabled(true); // Remove the icon

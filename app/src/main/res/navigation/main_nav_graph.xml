@@ -12,19 +12,37 @@
         tools:layout="@layout/fr_task_list" >
         <action
             android:id="@+id/task_view_action"
-            app:destination="@id/task_dest" />
+            app:destination="@id/task_view_dest" />
+        <action
+            android:id="@+id/task_add_action"
+            app:destination="@id/task_add_dest" />
     </fragment>
     <fragment
-        android:id="@+id/task_dest"
+        android:id="@+id/task_view_dest"
         android:name="com.aska.development.todolist.ui.main.tasks.view.TaskViewFragment"
         android:label="fr_task"
-        tools:layout="@layout/fr_task" >
+        tools:layout="@layout/fr_task_view" >
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/edit_action"
+            app:destination="@id/task_edit_dest" />
     </fragment>
     <fragment
         android:id="@+id/profile_dest"
         android:name="com.aska.development.todolist.ui.main.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/task_add_dest"
+        android:name="com.aska.development.todolist.ui.main.tasks.add.TaskAddFragment"
+        android:label="TaskAddFragment" />
+    <fragment
+        android:id="@+id/task_edit_dest"
+        android:name="com.aska.development.todolist.ui.main.tasks.edit.TaskEditFragment"
+        android:label="TaskEditFragment" >
+        <argument
+            android:name="task_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

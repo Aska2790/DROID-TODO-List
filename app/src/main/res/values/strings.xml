@@ -24,6 +24,8 @@
 
     <!--    Task-->
     <string name="task_list_dest_title">Задачи</string>
-    <string name="task_dest_title">Задача</string>
+    <string name="task_view_dest_title">Задача</string>
+    <string name="task_add_dest_title">Новая задача</string>
+    <string name="task_edit_dest_title">Редактирование</string>
     <string name="profile_sign_out_btn_label">Выход</string>
 </resources>

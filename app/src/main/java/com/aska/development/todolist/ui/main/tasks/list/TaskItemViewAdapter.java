@@ -1,4 +1,4 @@
-package com.aska.development.todolist.ui.main.tasks;
+package com.aska.development.todolist.ui.main.tasks.list;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aska.development.todolist.databinding.TaskItemViewBinding;
+import com.aska.development.todolist.ui.main.tasks.TaskItemViewModel;
 
 import java.util.List;
 

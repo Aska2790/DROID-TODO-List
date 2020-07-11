@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +20,6 @@ import com.aska.development.todolist.databinding.TaskListViewBinding;
 import com.aska.development.todolist.di.general.FactoryViewModelProvider;
 import com.aska.development.todolist.ui.auxiliary.RecyclerClickListener;
 import com.aska.development.todolist.ui.auxiliary.RecyclerTouchListenerImpl;
-import com.aska.development.todolist.ui.main.tasks.TaskItemViewAdapter;
 import com.aska.development.todolist.ui.main.tasks.TaskItemViewModel;
 
 import javax.inject.Inject;
@@ -110,7 +110,8 @@ public class TaskListFragment extends DaggerFragment implements RecyclerClickLis
         TaskItemViewModel item = mAdapter.getItem(position);
         if (item != null) {
             NavController navController = NavHostFragment.findNavController(TaskListFragment.this);
-            navController.navigate(TaskListFragmentDirections.taskViewAction(item.getId()));
+            TaskListFragmentDirections.TaskViewAction viewAction = TaskListFragmentDirections.taskViewAction(item.getId());
+            navController.navigate(viewAction);
         }
     }
 
@@ -119,7 +120,9 @@ public class TaskListFragment extends DaggerFragment implements RecyclerClickLis
     }
 
     private void onAddTask(View view) {
-        mViewModel.addTask();
+        NavController navController = NavHostFragment.findNavController(TaskListFragment.this);
+        NavDirections addAction = TaskListFragmentDirections.taskAddAction();
+        navController.navigate(addAction);
     }
 
     //endregion
