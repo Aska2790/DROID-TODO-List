@@ -5,38 +5,47 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
 @Dao
-public abstract class MainDao {
+public interface MainDao {
 
     //region Delete
 
     @Query("DELETE FROM TaskEntity")
-    public abstract void deleteAll();
+    void deleteAll();
+
+    @Query("DELETE FROM TaskEntity WHERE task_id=:remoteId")
+    void delete(String remoteId);
 
     //endregion
 
     //region Select
 
     @Query("SELECT * FROM TaskEntity WHERE task_id=:remoteId")
-    public abstract TaskEntity getTask(String remoteId);
+    TaskEntity getTask(String remoteId);
 
-    @Query("SELECT * FROM TaskEntity WHERE id=:id")
-    public abstract LiveData<TaskEntity> getObservedTask(long id);
+    @Query("SELECT * FROM TaskEntity WHERE task_id=:remoteId")
+    LiveData<TaskEntity> getObservedTask(String remoteId);
 
     @Query("SELECT * FROM TaskEntity")
-    public abstract LiveData<List<TaskEntity>> getObservedTasks();
+    LiveData<List<TaskEntity>> getObservedTasks();
 
     //endregion
 
     //region Insert
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract long insert(TaskEntity entity);
+    long insert(TaskEntity entity);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void insert(List<TaskEntity> entities);
+    //endregion
+
+    //region Update
+
+    @Update
+    void update(TaskEntity entity);
+
     //endregion
 }

@@ -113,6 +113,7 @@ public class AuthServiceImpl implements AuthService {
                 for(ProfileStateListener listener :mProfileStateListeners){
                     listener.onSignOut();
                 }
+                mProfileStateListeners.clear();
             }
         }
     }

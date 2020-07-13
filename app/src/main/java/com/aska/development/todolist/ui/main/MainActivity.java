@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.aska.development.todolist.R;
 import com.aska.development.todolist.di.general.FactoryViewModelProvider;
 import com.aska.development.todolist.ui.auth.AuthActivity;
+import com.aska.development.todolist.ui.auxiliary.BackPressListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import javax.inject.Inject;
@@ -21,6 +23,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 import static androidx.navigation.ui.NavigationUI.setupWithNavController;
+
 
 public class MainActivity extends DaggerAppCompatActivity {
 
@@ -49,6 +52,12 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        Fragment currentFragment = mHost.getChildFragmentManager().getFragments().get(0);
+        if ((currentFragment instanceof BackPressListener) && ((BackPressListener) currentFragment).onBackPressEvent()) {
+            return;
+        }
+
         if (!navController.popBackStack()) {
             super.onBackPressed();
         }
@@ -85,23 +94,15 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     private void initializeViewModel() {
         mViewModel = new ViewModelProvider(this, viewModelProvider).get(MainViewModel.class);
-        if(mViewModel.getProfile() == null){
-            Intent intent = new Intent(getApplicationContext(), AuthActivity.class);
-            startActivity(intent);
-            finish();
-
-        }else {
-            mViewModel.isAuthorized().observe(this, authorized -> {
-                if (authorized != null && !authorized) {
-                    Intent intent = new Intent(getApplicationContext(), AuthActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
+        mViewModel.isAuthorized().observe(this, authorized -> {
+            if (authorized != null && !authorized) {
+                Intent intent = new Intent(getApplicationContext(), AuthActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
-
-    //endregion
-
-
+//endregion
 }
+
+

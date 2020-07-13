@@ -38,7 +38,7 @@ public class MainViewModel extends ViewModel {
 
         mAuthService = authService;
         mRepository = repository;
-        isAuthorized = new MutableLiveData<>(mAuthService.getProfile() != null);
+        isAuthorized = new MutableLiveData<>(true);
         mAuthService.addProfileStateListener(new AuthService.ProfileStateListener() {
             @Override
             public void onSigned() {

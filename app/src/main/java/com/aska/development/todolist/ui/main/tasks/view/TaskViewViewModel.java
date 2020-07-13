@@ -1,16 +1,18 @@
 package com.aska.development.todolist.ui.main.tasks.view;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.aska.development.todolist.data.auxiliary.Result;
+import com.aska.development.todolist.data.auxiliary.SingleLiveEvent;
 import com.aska.development.todolist.data.reposotories.main.MainRepository;
-import com.aska.development.todolist.domain.model.Task;
+import com.aska.development.todolist.domain.interactors.DeleteTaskUseCase;
+import com.aska.development.todolist.domain.interfaces.AsyncActionListener;
 import com.aska.development.todolist.ui.auxiliary.UiItemMapper;
 import com.aska.development.todolist.ui.main.tasks.TaskItemViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,13 +20,17 @@ public class TaskViewViewModel extends ViewModel {
 
     //region Fields
     private MainRepository mRepository;
-    private LiveData<List<TaskItemViewModel>> mTaskItemViewModels;
+    private SingleLiveEvent<Result<Object>> mState;
     //endregion
 
     //region Properties
 
-    public LiveData<List<TaskItemViewModel>> getTaskItemViewModels() {
-        return mTaskItemViewModels;
+    public LiveData<Result<Object>> getState() {
+        return mState;
+    }
+
+    public LiveData<TaskItemViewModel> getTaskItem(String id) {
+        return Transformations.map(mRepository.getObservedTask(id), UiItemMapper::map);
     }
 
     //endregion
@@ -34,23 +40,33 @@ public class TaskViewViewModel extends ViewModel {
     @Inject
     public TaskViewViewModel(MainRepository repository) {
         mRepository = repository;
-        mTaskItemViewModels = Transformations.map(mRepository.getObservedTaskList(), taskList -> {
-            List<TaskItemViewModel> itemViewModels = new ArrayList<>();
-            if (taskList != null) {
-                for (Task task : taskList) {
-                    itemViewModels.add(UiItemMapper.map(task));
-                }
-            }
-            return itemViewModels;
-        });
+        mState = new SingleLiveEvent<>();
     }
 
     //endregion
 
     //region Methods
-    //endregion
+    public void deleteTask(String taskId) {
 
-    //region Inner
+        mState.postValue(Result.loading(taskId));
+
+        new DeleteTaskUseCase()
+                .setTaskId(taskId)
+                .setExecutor(mRepository)
+                .setListener(new AsyncActionListener() {
+                    @Override
+                    public void onSuccess(@Nullable Object object) {
+                        mState.postValue(Result.success(object));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        mState.postValue(Result.error(throwable.getMessage(), null));
+                    }
+                })
+                .execute();
+    }
+
     //endregion
 }
 

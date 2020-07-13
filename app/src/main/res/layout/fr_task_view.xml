@@ -3,17 +3,59 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data class="TaskViewBinding">
-
+        <variable
+            name="item"
+            type="com.aska.development.todolist.ui.main.tasks.TaskItemViewModel" />
     </data>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Task view" />
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <ProgressBar
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                android:id="@+id/request_indicator"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:indeterminate="true"
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:id="@+id/task_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/task_add_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/task_add_title_hint"
+                    android:text="@{item.id}" />
+
+                <TextView
+                    android:layout_marginTop="24dp"
+                    android:id="@+id/task_add_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/task_add_title_hint"
+                    android:text="@{item.title}" />
+
+                <TextView
+                    android:id="@+id/task_add_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    tools:text="@string/task_add_description_hint"
+                    android:text="@{item.description}" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </layout>

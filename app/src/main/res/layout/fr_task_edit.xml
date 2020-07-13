@@ -2,12 +2,62 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="TaskEditBinding">
-
+        <variable
+            name="viewmodel"
+            type="com.aska.development.todolist.ui.main.tasks.edit.TaskEditViewModel" />
+        <variable
+            name="item"
+            type="com.aska.development.todolist.ui.main.tasks.TaskItemViewModel" />
     </data>
-    <TextView
-        android:text="ADD"
-        android:gravity="center"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                android:id="@+id/request_indicator"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:indeterminate="true"
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <LinearLayout
+                android:id="@+id/task_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/task_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/task_add_title_hint"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:selectAllOnFocus="true"
+                    android:text="@={item.title}" />
+
+                <EditText
+                    android:imeOptions="actionDone"
+                    android:id="@+id/task_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:hint="@string/task_add_description_hint"
+                    android:imeActionLabel="@string/save_menu_item_title"
+                    android:inputType="textMultiLine"
+                    android:selectAllOnFocus="true"
+                    android:text="@={item.description}" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 </layout>

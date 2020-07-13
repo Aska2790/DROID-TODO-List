@@ -2,10 +2,15 @@ package com.aska.development.todolist.ui.main.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -40,6 +45,32 @@ public class ProfileFragment extends DaggerFragment {
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.profile_view_action, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.sign_out_action){
+            onSignOut();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onSignOut() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.profile_sign_out_dialog_title)
+                .setNegativeButton(R.string.dialog_neg_button_title, null)
+                .setPositiveButton(R.string.dialog_pos_button_title, (dialog, which) -> {
+                    mViewModel.signOut();
+                })
+                .create()
+                .show();
+    }
+
     //endregion
 
     //region Initialization
@@ -62,7 +93,7 @@ public class ProfileFragment extends DaggerFragment {
     }
 
     private void initializeActionBar() {
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
         ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
         if (supportActionBar != null) {

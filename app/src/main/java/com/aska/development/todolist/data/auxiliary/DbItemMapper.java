@@ -21,11 +21,14 @@ public class DbItemMapper {
     }
 
     public static Task map(TaskEntity entity){
+        if(entity == null){
+            return null;
+        }
 
         Task model = new Task()
                 .setId(entity.getRemoteId())
                 .setTitle(entity.getTitle())
-                .setDescription(entity.getTitle());
+                .setDescription(entity.getDescription());
 
         return model;
     }

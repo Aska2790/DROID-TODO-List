@@ -19,8 +19,17 @@
             android:layout_height="wrap_content"
             android:padding="24dp">
 
+            <ProgressBar
+                android:layout_alignParentTop="true"
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:indeterminate="true"
+                android:visibility="invisible" />
 
             <TextView
+                android:layout_below="@id/loading"
                 android:id="@+id/auth_error_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,30 +101,20 @@
                     android:text="@={viewmodel.controlPassword}" />
 
                 <Button
+                    android:layout_gravity="center"
+                    android:textColor="@color/textColorPrimary"
+                    android:background="@drawable/btn_selector"
                     android:id="@+id/sign_up"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="32dp"
+                    android:paddingLeft="50dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginRight="32dp"
+                    android:paddingRight="50dp"
                     android:enabled="@{viewmodel.paramValid}"
                     android:onClick="@{()->viewmodel.signUp()}"
                     android:text="@string/auth_sign_up"
                     android:textAllCaps="false" />
             </LinearLayout>
-
-
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="64dp"
-                android:indeterminate="true"
-                android:visibility="gone" />
 
         </RelativeLayout>
     </ScrollView>
